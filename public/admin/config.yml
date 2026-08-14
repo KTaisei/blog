@@ -1,15 +1,15 @@
 # 公開前に README の手順に従い、以下の 3 つを実値に置き換えてください。
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPOSITORY
+  repo: YOUR_GITHUB_ID/YOUR_REPOSITORY_NAME
   branch: main
-  base_url: https://YOUR_WORKER.workers.dev
+  base_url: https://YOUR_WORKER.YOUR_SUBDOMAIN.workers.dev
   auth_endpoint: auth
 
 # プロジェクト Pages の場合は /YOUR_REPOSITORY/images/uploads に変更します。
 # <username>.github.io リポジトリの場合は /images/uploads のままで構いません。
 media_folder: public/images/uploads
-public_folder: /images/uploads
+public_folder: /YOUR_REPOSITORY_NAME/images/uploads
 publish_mode: simple
 
 collections:
