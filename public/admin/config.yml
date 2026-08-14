@@ -1,9 +1,9 @@
 # 公開前に README の手順に従い、以下の 3 つを実値に置き換えてください。
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPOSITORY
+  repo: ktaisei/blog
   branch: main
-  base_url: https://YOUR_WORKER.workers.dev
+  base_url: https://decap-github-oauth-proxy.mathlike-science.workers.dev
   auth_endpoint: auth
 
 # このブログ（https://ktaisei.github.io/blog/）では /blog を残してください。
