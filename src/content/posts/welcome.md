@@ -19,7 +19,7 @@ draft: false
 
 ブログなんて書く気は無いのですが、webサイトをつくるのは楽しいですね!
 
-![workflow](/ktaisei/images/uploads/blog-workflow.png)
+![ブログ公開ワークフロー](/blog/images/uploads/blog-workflow.png)
 
 ```ts
 console.log('Hello, blog!');
