@@ -31,7 +31,7 @@ const imageUrl = new URL(assetUrl(image || '/images/og-default.svg'), Astro.site
       </div>
     </header>
     <main><slot /></main>
-    <footer><div class="footer-inner"><div><span>© {new Date().getFullYear()} my blog</span><span class="license-note">UI は <a href="https://design.digital.go.jp/dads/" rel="external">デジタル庁デザインシステム</a>を参考に改変して作成</span></div><a href={`${import.meta.env.BASE_URL}admin/`}>管理画面</a></div></footer>
+    <footer><div class="footer-inner"><div><span>© {new Date().getFullYear()} 川上泰正</span><span class="license-note">UI は <a href="https://design.digital.go.jp/dads/" rel="external">デジタル庁デザインシステム</a>を参考に改変して作成</span></div><a href={`${import.meta.env.BASE_URL}admin/`}>管理画面</a></div></footer>
   </body>
 </html>
 <style is:global>
