@@ -2,4 +2,4 @@
 import { getCollection } from 'astro:content'; import BaseLayout from '../../layouts/BaseLayout.astro'; import PostList from '../../components/PostList.astro';
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="記事一覧 | my blog"><section class="page-heading"><p class="eyebrow">Archive</p><h1>記事一覧</h1><p>新しい記事から順に掲載しています。</p></section><PostList {posts} /></BaseLayout>
+<BaseLayout title="記事一覧 | taisei.dev"><section class="page-heading"><p class="eyebrow">Archive</p><h1>記事一覧</h1><p>新しい記事から順に掲載しています。</p></section><PostList {posts} /></BaseLayout>
