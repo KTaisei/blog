@@ -1,0 +1,6 @@
+---
+import { getCollection, render } from 'astro:content'; import BaseLayout from '../../layouts/BaseLayout.astro';
+export async function getStaticPaths() { const posts = await getCollection('posts', ({ data }) => !data.draft); return posts.map((post) => ({ params: { slug: post.id }, props: { post } })); }
+const { post } = Astro.props; const { Content } = await render(post); const base = import.meta.env.BASE_URL; const imageSrc = post.data.image?.startsWith('/') && !post.data.image.startsWith(base) ? `${base}${post.data.image.slice(1)}` : post.data.image;
+---
+<BaseLayout title={`${post.data.title} | my blog`} description={post.data.description} image={post.data.image}><article><header class="article-header"><h1>{post.data.title}</h1><p class="meta"><time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('ja-JP')}</time></p>{imageSrc && <img class="article-image" src={imageSrc} alt="" />}</header><div class="prose"><Content /></div><ul class="tags">{post.data.tags.map((tag) => <li><a class="tag" href={`${import.meta.env.BASE_URL}tags/${encodeURIComponent(tag)}/`}>{tag}</a></li>)}</ul></article></BaseLayout>

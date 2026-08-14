@@ -1,0 +1,30 @@
+# 公開前に README の手順に従い、以下の 3 つを実値に置き換えてください。
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPOSITORY
+  branch: main
+  base_url: https://YOUR_WORKER.workers.dev
+  auth_endpoint: auth
+
+# プロジェクト Pages の場合は /YOUR_REPOSITORY/images/uploads に変更します。
+# <username>.github.io リポジトリの場合は /images/uploads のままで構いません。
+media_folder: public/images/uploads
+public_folder: /images/uploads
+publish_mode: simple
+
+collections:
+  - name: posts
+    label: 記事
+    folder: src/content/posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: タイトル, name: title, widget: string }
+      - { label: 概要, name: description, widget: text, required: false }
+      - { label: 公開日, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: タグ, name: tags, widget: list, required: false, default: [] }
+      - { label: アイキャッチ画像, name: image, widget: image, required: false }
+      - { label: 下書き, name: draft, widget: boolean, default: true, hint: "オンの場合、公開サイトには表示されません" }
+      - { label: 本文, name: body, widget: markdown }

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="デザイン方針 | my blog" description="このブログで採用しているデザイン方針と、デジタル庁デザインシステムの利用表記です。">
+  <section class="page-heading"><p class="eyebrow">Design system</p><h1>デザイン方針</h1><p>読みやすさと、誰もが迷わず使えることを大切にしています。</p></section>
+
+  <div class="prose">
+    <h2>目指す体験</h2>
+    <p>情報の優先順位を明確にし、十分な文字サイズ、明瞭な見出し、キーボード操作時のフォーカス表示、コントラストを意識した配色を採用しています。装飾は控え、記事を読むことに集中できる画面を目指しています。</p>
+
+    <h2>採用している考え方</h2>
+    <ul class="content-list">
+      <li>青を主操作・リンクの色とし、状態を色だけに依存しない設計</li>
+      <li>見出し・本文・補足情報の明確な階層化</li>
+      <li>マウスだけでなくキーボードでも認識できるフォーカス表示</li>
+      <li>狭い画面でも横スクロールを生みにくいレスポンシブレイアウト</li>
+    </ul>
+
+    <h2>出典・ライセンス表記</h2>
+    <div class="notice">
+      <h2>デジタル庁デザインシステムを参考にしています</h2>
+      <p>本ブログのUIは、デジタル庁デザインシステムのデザイン言語、コンポーネントの考え方およびガイドラインを参考にし、本ブログ向けに編集・加工して作成しています。デジタル庁が本ブログを作成・承認したことを示すものではありません。</p>
+      <p>出典：<a href="https://design.digital.go.jp/dads/" rel="external">デジタル庁デザインシステムウェブサイト</a></p>
+    </div>
+
+    <p>デザインシステム本体の利用上の注意事項、Figmaデータおよびコードスニペットのライセンスは、<a href="https://design.digital.go.jp/dads/introduction/notices/" rel="external">デジタル庁デザインシステムの利用上の注意事項</a>を確認してください。このブログでは同サイトのコードスニペット、Figmaデータ、アイコン素材をそのまま転載していません。</p>
+  </div>
+</BaseLayout>

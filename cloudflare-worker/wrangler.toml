@@ -1,0 +1,6 @@
+name = "decap-github-oauth-proxy"
+main = "src/index.js"
+compatibility_date = "2026-08-14"
+
+# 本番 URL を設定後、GitHub OAuth App の Callback URL を
+# https://<worker名>.<アカウント>.workers.dev/callback にします。
