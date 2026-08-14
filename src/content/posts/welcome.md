@@ -5,6 +5,7 @@ date: 2026-08-14
 tags:
   - Astro
   - ブログ
+image: /ktaisei/images/uploads/designer.jpeg
 draft: false
 ---
 ブログ新しくしました！
