@@ -1,0 +1,58 @@
+---
+// Mermaid code fences are emitted by Astro/Shiki as
+// <pre data-language="mermaid"><code>...</code></pre>. This component turns
+// only those blocks into SVG diagrams in the browser.
+---
+<script>
+  const blocks = document.querySelectorAll('pre[data-language="mermaid"]');
+  if (blocks.length) {
+    const { default: mermaid } = await import('mermaid');
+    mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'strict',
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#eef0ff',
+      primaryBorderColor: '#0017c1',
+      primaryTextColor: '#1a1a1c',
+      lineColor: '#3b3b40',
+      secondaryColor: '#f1f1f4',
+      tertiaryColor: '#ffffff',
+      fontFamily: 'system-ui, -apple-system, "Hiragino Kaku Gothic ProN", sans-serif',
+    },
+    });
+
+    await Promise.all([...blocks].map(async (block, index) => {
+    const source = block.querySelector('code')?.textContent?.trim();
+    if (!source) return;
+    try {
+      const { svg, bindFunctions } = await mermaid.render(`mermaid-diagram-${index}`, source);
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid-diagram';
+      diagram.setAttribute('role', 'img');
+      diagram.setAttribute('aria-label', 'Mermaid diagram');
+      diagram.innerHTML = svg;
+      block.replaceWith(diagram);
+      bindFunctions?.(diagram);
+    } catch (error) {
+      console.error('Mermaid diagram could not be rendered:', error);
+      block.classList.add('mermaid-error');
+    }
+    }));
+  }
+</script>
+
+<style is:global>
+  .prose .mermaid-diagram {
+    display: grid;
+    place-items: center;
+    margin: 2rem 0;
+    padding: 1.25rem;
+    overflow-x: auto;
+    border: 1px solid #8f8f95;
+    background: #fff;
+  }
+  .prose .mermaid-diagram svg { min-width: 520px; max-width: none; height: auto; }
+  .prose pre[data-language="mermaid"].mermaid-error { border-color: #b60205; }
+  @media (max-width: 620px) { .prose .mermaid-diagram { padding: .75rem; }.prose .mermaid-diagram svg { min-width: 460px; } }
+</style>
