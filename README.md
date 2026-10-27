@@ -11,7 +11,7 @@
 - `repo`: `YOUR_GITHUB_USERNAME/YOUR_REPOSITORY`
 - `base_url`: デプロイした Worker の URL（末尾の `/` は不要）
 
-さらに、GitHub の **プロジェクト Pages**（URL が `https://user.github.io/repository`）なら `public_folder` を `/repository/images/uploads` に変えます。ユーザー Pages（`https://user.github.io`）は `/images/uploads` のままです。
+GitHub の **プロジェクト Pages**（URL が `https://user.github.io/repository`）なら `public_folder` は `/repository/images/uploads` にします。このブログでは `/blog/images/uploads` です。ユーザー Pages（`https://user.github.io`）は `/images/uploads` にします。
 
 GitHub リポジトリの **Settings → Secrets and variables → Actions → Variables** にも次を設定します。
 
@@ -71,6 +71,30 @@ workflow は [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) �
 - 編集・削除も同じ管理画面で実行でき、いずれも GitHub に直接反映されます。
 
 記事の frontmatter は `title`, `description`, `date`, `tags`, `image`, `draft` です。公開日が新しい順で一覧表示されます。
+
+### OGP・Twitterカード
+
+各ページにタイトル・概要・公開URL・共有画像のメタタグを出力します。X（Twitter）では大きな画像のカード（`summary_large_image`）を指定しています。記事ページには記事種別・公開日・更新日（`updatedDate` がある場合）・タグも出力します。
+
+- 記事の `description` が共有時の概要、`image` が共有画像になります。
+- 画像未指定の場合は `public/images/og-default.png`（1200 × 630）を使用します。このファイルを差し替えると共通の共有画像を変更できます。
+- 共有画像には PNG または JPEG を使用してください。`image` は `/images/uploads/example.png` などのサイト内パス、または HTTPS の絶対URLを指定できます。
+- 公開先に合わせて `SITE_URL` と `BASE_PATH` を設定してください。共有URL・画像URLに反映されます。
+
+### Mermaid 図
+
+本文に次のような Markdown コードブロックを書いて保存すると、公開ページではフローチャートとして描画されます。
+
+````md
+```mermaid
+flowchart LR
+  CMS[Decap CMS] --> GitHub[GitHubに保存]
+  GitHub --> Actions[GitHub Actions]
+  Actions --> Pages[GitHub Pages]
+```
+````
+
+Mermaid以外のコードブロックは従来どおりコードとして表示されます。
 
 ## ローカル開発
 

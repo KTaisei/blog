@@ -33,9 +33,18 @@ export default {
       const userResponse = await fetch('https://api.github.com/user', { headers: { ...githubHeaders, Authorization: `Bearer ${tokenData.access_token}` } });
       const user = await userResponse.json();
       if (user.login?.toLowerCase() !== env.ALLOWED_GITHUB_LOGIN?.toLowerCase()) return html(`window.opener?.postMessage('authorization:github:error:This GitHub account is not allowed','*');window.close();`, 403);
-      // Decap CMS reads this exact message format from the OAuth popup.
-      const payload = JSON.stringify(`authorization:github:success:${tokenData.access_token}`);
-      return new Response(`<!doctype html><html><body><script>window.opener&&window.opener.postMessage(${payload},'*');window.close()</script></body></html>`, { headers: { 'content-type': 'text/html; charset=UTF-8', 'Set-Cookie': 'decap_oauth_state=; HttpOnly; Secure; SameSite=Lax; Path=/callback; Max-Age=0', 'cache-control': 'no-store' } });
+      // Decap CMS first listens for "authorizing:github", then sends a message
+      // back to the popup. The token must be a JSON object, not a bare string.
+      const message = JSON.stringify(`authorization:github:success:${JSON.stringify({ token: tokenData.access_token })}`);
+      return new Response(`<!doctype html><html><body><p>Authorizing Decap CMS…</p><script>
+        const receiveMessage = () => {
+          window.opener?.postMessage(${message}, '*');
+          window.removeEventListener('message', receiveMessage);
+          window.close();
+        };
+        window.addEventListener('message', receiveMessage);
+        window.opener?.postMessage('authorizing:github', '*');
+      </script></body></html>`, { headers: { 'content-type': 'text/html; charset=UTF-8', 'Set-Cookie': 'decap_oauth_state=; HttpOnly; Secure; SameSite=Lax; Path=/callback; Max-Age=0', 'cache-control': 'no-store' } });
     }
     return new Response('Not found', { status: 404, headers: cors() });
   }
